@@ -24,8 +24,8 @@ from iams import __version__  # noqa
 # -- Project information -----------------------------------------------------
 
 project = 'Industrial AMS'
-copyright = '%s, Sebastian Braun' % now.year
-author = 'Sebastian Braun'
+copyright = '%s, Stephan Zander' % now.year
+author = 'Stephan Zander'
 version = __version__
 
 

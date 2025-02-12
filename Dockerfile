@@ -2,7 +2,7 @@
 ARG BASEIMAGE=ubuntu:rolling
 FROM $BASEIMAGE as basestage
 
-MAINTAINER Sebastian Braun <sebastian.braun@fh-aachen.de>
+LABEL maintainer="Stephan Zander <stephan.zander@lucas-nuelle.de>"
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C
