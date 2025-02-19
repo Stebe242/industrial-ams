@@ -53,7 +53,7 @@ class TCPCoroutine(Coroutine):  # pylint: disable=too-many-instance-attributes
                     timeout=self._read_timeout,
                 )
                 break
-            except (ConnectionRefusedError, asyncio.TimeoutError):
+            except (ConnectionRefusedError, httpx.TimeoutException):
                 wait = min(60, wait + 1)
                 logger.info('Connection to %s:%s refused (retry in %ss)', self._host, self._port, wait)
                 await asyncio.sleep(wait)
@@ -93,7 +93,7 @@ class TCPCoroutine(Coroutine):  # pylint: disable=too-many-instance-attributes
         while not self._stop.done():
             try:
                 data = await asyncio.wait_for(self.read(), timeout=self._read_timeout)
-            except asyncio.TimeoutError:
+            except httpx.TimeoutException:
                 logger.info("TCP read timeout")
                 break
 
@@ -122,7 +122,7 @@ class TCPCoroutine(Coroutine):  # pylint: disable=too-many-instance-attributes
         self._writer.write(data)
         try:
             await asyncio.wait_for(self._writer.drain(), timeout=(timeout or self._write_timeout))
-        except asyncio.TimeoutError:
+        except httpx.TimeoutException:
             self.stop()
             return False
         self._last = datetime.now()

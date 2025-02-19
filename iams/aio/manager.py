@@ -113,7 +113,7 @@ class Manager:
                         exc_info=exc,
                         stack_info=True,
                     )
-        except asyncio.TimeoutError:
+        except httpx.TimeoutException:
             logger.warning("Not all coroutines were cancelled within %.1f seconds", self.timeout)
         return None
 

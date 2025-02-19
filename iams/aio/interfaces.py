@@ -154,7 +154,7 @@ class EventCoroutine(Coroutine, ABC):
                 async with self._lock:
                     await self.main(periodic=periodic)
                 await asyncio.wait_for(self._event.wait(), timeout=self.get_interval())
-            except asyncio.TimeoutError:
+            except httpx.TimeoutException:
                 periodic = True
             except asyncio.CancelledError:
                 logger.debug("%r received the cancel signal", self)
