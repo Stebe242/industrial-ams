@@ -14,6 +14,8 @@ COPY dist/iams-*-py3-none-any.whl /tmp/
 RUN apt-get update && apt-get install --no-install-recommends -y -q \
     python3 \
     python3-pip \
+    python3-dev \
+    build-essential \
 && pip3 install /tmp/iams-*-py3-none-any.whl --break-system-packages \
 && apt-get clean \
 && rm -rf /tmp/ /var/lib/apt/lists/*
