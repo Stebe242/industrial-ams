@@ -11,7 +11,10 @@ LABEL iams.plugins.influxdb=MySensor
 RUN apt-get update && apt-get install --no-install-recommends -y -q \
     python3 \
     python3-pip \
-&& pip install iams asyncua influxdb \
+&& pip install \
+    git+https://github.com/Stebe242/industrial-ams.git@main#egg=iams \
+    asyncua \
+    influxdb \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
